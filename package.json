@@ -1,0 +1,35 @@
+{
+    "name": "tasks-crud",
+    "version": "1.0.0",
+    "description": "Node.js CRUD API para gerenciamento de tarefas com TypeScript e DDD",
+    "main": "dist/main.js",
+    "type": "module",
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/main.js",
+        "dev": "tsc && node dist/main.js"
+    },
+    "keywords": [
+        "nodejs",
+        "typescript",
+        "crud",
+        "ddd",
+        "clean-code"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/better-sqlite3": "^7.6.11",
+        "@types/busboy": "^1.5.4",
+        "@types/node": "^22.10.2",
+        "typescript": "^5.7.2"
+    },
+    "dependencies": {
+        "better-sqlite3": "^11.6.0",
+        "busboy": "^1.6.0",
+        "csv-parse": "^5.6.0"
+    },
+    "engines": {
+        "node": ">=22.0.0"
+    }
+}

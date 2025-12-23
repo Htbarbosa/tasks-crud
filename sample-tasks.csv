@@ -1,0 +1,6 @@
+title,description,completed
+Learn TypeScript,Study advanced TypeScript patterns and generics,false
+Build REST API,Create a CRUD API without frameworks,true
+Implement DDD,Apply Domain Driven Design principles to the project,false
+Write Tests,Add unit and integration tests,false
+Deploy Application,Deploy the API to production,false
