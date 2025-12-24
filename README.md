@@ -49,10 +49,10 @@ docker-compose up -d
 
 ## Environment Variables
 
-| Variable       | Description                                | Default  |
-| -------------- | ------------------------------------------ | -------- |
-| `PORT`         | HTTP server port                           | `3000`   |
-| `STORAGE_TYPE` | Persistence type (`memory` or `sqlite`)    | `sqlite` |
+| Variable       | Description                             | Default  |
+| -------------- | --------------------------------------- | -------- |
+| `PORT`         | HTTP server port                        | `3000`   |
+| `STORAGE_TYPE` | Persistence type (`memory` or `sqlite`) | `sqlite` |
 
 ## API Endpoints
 
