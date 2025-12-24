@@ -1,49 +1,62 @@
 # Tasks CRUD API
 
-API REST para gerenciamento de tarefas desenvolvida em **Node.js** e **TypeScript**, utilizando apenas o módulo HTTP nativo (sem Express ou outros frameworks).
+REST API for task management built with **Node.js** and **TypeScript**, using only the native HTTP module (no Express or other frameworks).
 
-## Arquitetura
+## Architecture
 
-O projeto segue os princípios de **DDD (Domain-Driven Design)** e **Clean Code**, organizado em camadas:
+The project follows **DDD (Domain-Driven Design)** and **Clean Code** principles, organized in layers:
 
 ```
 src/
-├── domain/           # Entidades, Value Objects, Interfaces de Repository
+├── domain/           # Entities, Value Objects, Repository Interfaces
 ├── application/      # Use Cases, DTOs
-├── infrastructure/   # Implementações de Repository, Database, Services
+├── infrastructure/   # Repository Implementations, Database, Services
 ├── presentation/     # HTTP Server, Router, Controllers, Validators
-├── shared/           # Erros, Utilitários compartilhados
-└── main.ts           # Entry point com injeção de dependências
+├── shared/           # Errors, Shared Utilities
+└── main.ts           # Entry point with dependency injection
 ```
 
-## Requisitos
+## Requirements
 
 - Node.js >= 22.0.0 (LTS)
-- npm ou yarn
+- npm or yarn
 
-## Instalação
+## Installation
 
 ```bash
-# Instalar dependências
+# Install dependencies
 npm install
 
-# Compilar TypeScript
+# Build TypeScript
 npm run build
 
-# Iniciar servidor
+# Start server
 npm start
 ```
 
-## Variáveis de Ambiente
+## Docker
 
-| Variável       | Descrição                                   | Padrão   |
-| -------------- | ------------------------------------------- | -------- |
-| `PORT`         | Porta do servidor HTTP                      | `3000`   |
-| `STORAGE_TYPE` | Tipo de persistência (`memory` ou `sqlite`) | `sqlite` |
+```bash
+# Start with script
+./scripts/docker-start.sh
 
-## Endpoints da API
+# Or with docker-compose
+docker-compose up -d
 
-### Listar Tarefas
+# Stop
+./scripts/docker-stop.sh
+```
+
+## Environment Variables
+
+| Variable       | Description                                | Default  |
+| -------------- | ------------------------------------------ | -------- |
+| `PORT`         | HTTP server port                           | `3000`   |
+| `STORAGE_TYPE` | Persistence type (`memory` or `sqlite`)    | `sqlite` |
+
+## API Endpoints
+
+### List Tasks
 
 ```http
 GET /tasks
@@ -52,49 +65,49 @@ GET /tasks?description=api
 GET /tasks?title=learn&description=patterns
 ```
 
-### Obter Tarefa por ID
+### Get Task by ID
 
 ```http
 GET /tasks/:id
 ```
 
-### Criar Tarefa
+### Create Task
 
 ```http
 POST /tasks
 Content-Type: application/json
 
 {
-  "title": "Minha tarefa",
-  "description": "Descrição da tarefa"
+  "title": "My task",
+  "description": "Task description"
 }
 ```
 
-### Atualizar Tarefa
+### Update Task
 
 ```http
 PUT /tasks/:id
 Content-Type: application/json
 
 {
-  "title": "Título atualizado",
-  "description": "Descrição atualizada"
+  "title": "Updated title",
+  "description": "Updated description"
 }
 ```
 
-### Deletar Tarefa
+### Delete Task
 
 ```http
 DELETE /tasks/:id
 ```
 
-### Marcar como Concluída
+### Mark as Complete
 
 ```http
 PATCH /tasks/:id/complete
 ```
 
-### Importar Tarefas via CSV
+### Import Tasks from CSV
 
 ```http
 POST /tasks/import
@@ -103,9 +116,9 @@ Content-Type: multipart/form-data
 file: tasks.csv
 ```
 
-## Formato do Arquivo CSV
+## CSV File Format
 
-O arquivo CSV deve conter as colunas `title`, `description` e `completed`:
+The CSV file must contain the columns `title`, `description`, and `completed`:
 
 ```csv
 title,description,completed
@@ -113,42 +126,42 @@ Learn TypeScript,Study advanced TypeScript patterns,false
 Build REST API,Create a CRUD API without frameworks,true
 ```
 
-## Exemplos com cURL
+## cURL Examples
 
 ```bash
-# Criar tarefa
+# Create task
 curl -X POST http://localhost:3000/tasks \
   -H "Content-Type: application/json" \
-  -d '{"title": "Nova tarefa", "description": "Descrição"}'
+  -d '{"title": "New task", "description": "Description"}'
 
-# Listar todas
+# List all
 curl http://localhost:3000/tasks
 
-# Filtrar por título
+# Filter by title
 curl "http://localhost:3000/tasks?title=typescript"
 
-# Obter por ID
-curl http://localhost:3000/tasks/UUID-AQUI
+# Get by ID
+curl http://localhost:3000/tasks/UUID-HERE
 
-# Atualizar
-curl -X PUT http://localhost:3000/tasks/UUID-AQUI \
+# Update
+curl -X PUT http://localhost:3000/tasks/UUID-HERE \
   -H "Content-Type: application/json" \
-  -d '{"title": "Atualizada", "description": "Nova descrição"}'
+  -d '{"title": "Updated", "description": "New description"}'
 
-# Marcar como concluída
-curl -X PATCH http://localhost:3000/tasks/UUID-AQUI/complete
+# Mark as complete
+curl -X PATCH http://localhost:3000/tasks/UUID-HERE/complete
 
-# Deletar
-curl -X DELETE http://localhost:3000/tasks/UUID-AQUI
+# Delete
+curl -X DELETE http://localhost:3000/tasks/UUID-HERE
 
-# Importar CSV
+# Import CSV
 curl -X POST http://localhost:3000/tasks/import \
   -F "file=@sample-tasks.csv"
 ```
 
-## Estrutura de Resposta
+## Response Structure
 
-### Sucesso
+### Success
 
 ```json
 {
@@ -158,7 +171,7 @@ curl -X POST http://localhost:3000/tasks/import \
 }
 ```
 
-### Erro
+### Error
 
 ```json
 {
@@ -168,14 +181,14 @@ curl -X POST http://localhost:3000/tasks/import \
 }
 ```
 
-## Tecnologias
+## Technologies
 
-- **Node.js** (HTTP nativo)
+- **Node.js** (native HTTP)
 - **TypeScript** 5.7+
-- **better-sqlite3** - Banco de dados SQLite
-- **csv-parse** - Parser de CSV
-- **busboy** - Parser de multipart/form-data
+- **better-sqlite3** - SQLite database
+- **csv-parse** - CSV parser
+- **busboy** - multipart/form-data parser
 
-## Licença
+## License
 
 MIT
