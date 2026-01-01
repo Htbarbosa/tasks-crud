@@ -1,4 +1,4 @@
-# Tasks CRUD API
+# Tasks API
 
 REST API for task management built with **Node.js** and **TypeScript**, using only the native HTTP module (no Express or other frameworks).
 
